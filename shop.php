@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -70,10 +70,10 @@
             <nav class="amado-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li class="active"><a href="shop.php">Shop</a></li>
+                    <li><a href="product-details.php">Product</a></li>
+                    <li><a href="cart.php">Cart</a></li>
+                    <li><a href="checkout.php">Checkout</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -232,6 +232,7 @@
                 </div>
 
                 <div class="row">
+                <!-- Selecting data from the -->
 
                     <!-- Single Product Area -->
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">
@@ -306,6 +307,61 @@
                             </div>
                         </div>
                     </div>
+                    <?php
+                    require "connect.php";
+                    $a=0;
+                    $query=mysqli_query($con,"select * from product_images");
+                    echo "<table border='1'>";
+                    if (mysqli_num_rows($query) > 0) {
+                        while($row = mysqli_fetch_assoc($query)) {
+                       if($a % 3 ==0){
+                           echo ' <!-- Single Product Area -->
+                           <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                               <div class="single-product-wrapper">
+                                   <!-- Product Image -->
+                                   <div class="product-img">
+                                       <img src="img/product-img/product5.jpg" alt="">
+                                       <!-- Hover Thumb -->
+                                       <img class="hover-img" src="images/product6.jpg" alt="">
+                                   </div>
+       
+                                   <!-- Product Description -->
+                                   <div class="product-description d-flex align-items-center justify-content-between">
+                                       <!-- Product Meta Data -->
+                                       <div class="product-meta-data">
+                                           <div class="line"></div>
+                                           <p class="product-price">$180</p>
+                                           <a href="product-details.html">
+                                               <h6>Modern Chair</h6>
+                                           </a>
+                                       </div>
+                                       <!-- Ratings & Cart -->
+                                       <div class="ratings-cart text-right">
+                                           <div class="ratings">
+                                               <i class="fa fa-star" aria-hidden="true"></i>
+                                               <i class="fa fa-star" aria-hidden="true"></i>
+                                               <i class="fa fa-star" aria-hidden="true"></i>
+                                               <i class="fa fa-star" aria-hidden="true"></i>
+                                               <i class="fa fa-star" aria-hidden="true"></i>
+                                           </div>
+                                           <div class="cart">
+                                               <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+       ';
+                       }
+                        echo"";
+                       if($a % 3 == 1){
+                            echo "</tr>";
+                       }
+                       $a++;
+                     } 
+                    }
+                    echo "</table>";
+                    ?>
 
                     <!-- Single Product Area -->
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">

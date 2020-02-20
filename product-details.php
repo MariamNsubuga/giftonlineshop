@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-
+<?php require_once "connect.php";?>
 <body>
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-100">
@@ -118,7 +118,8 @@
                     <div class="col-12 col-lg-7">
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
+                                <!-- <ol class="carousel-indicators">
+                                   
                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
                                     </li>
                                     <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
@@ -127,40 +128,60 @@
                                     </li>
                                     <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
                                     </li>
-                                </ol>
+                                </ol> -->
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-1.jpg" alt="First slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
-                                        </a>
-                                    </div>
+                               
+                                <?php
+                                    //    require "connect.php";           
+                                        if(isset($_REQUEST['submit'])){
+                                            $product_id = $_REQUEST['product_id'];
+            
+                                            $query=mysqli_query($con,"select * from product_images where product_id=".$product_id."") or die(mysqli_error());
+                                            $row = mysqli_fetch_array($query);
+                                            // select product details from the product table
+                                            $query_pdt=mysqli_query($con,"select * from products where id=".$product_id."");
+                                            $pdt_row=mysqli_fetch_array($query_pdt);
+                                            echo '
+                                                    <div class="carousel-item active">
+                                                <a class="gallery_img" href="images/'.$row['name'].'">
+                                                    <img class="d-block w-100" src="images/'.$row['name'].'" alt="First slide">
+                                                </a>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
+                                                    <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
+                                                </a>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
+                                                    <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
+                                                </a>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
+                                                    <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                                </a>
+                                            </div>  
+                                            ';
+                                            
+                                        }
+                                        
+                                    ?>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-5">
+                    
                         <div class="single_product_desc">
                             <!-- Product Meta Data -->
+                            
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">$180</p>
-                                <a href="product-details.html">
-                                    <h6>White Modern Chair</h6>
+                                <p class="product-price">$<?php echo $pdt_row['price'];?></p>
+                                <a href="product-details.php">
+                                    <h6><?php echo $pdt_row['name'];?></h6>
                                 </a>
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -180,12 +201,14 @@
                             </div>
 
                             <div class="short_overview my-5">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                                <p><?php echo $pdt_row['description'];?></p>
                             </div>
 
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post">
                                 <div class="cart-btn d-flex mb-50">
+                                <input type="hidden" value="<?php echo $row['product_id'];?>" name="product_id"/>
+                                <input type="hidden" value="<?php echo $pdt_row['name'];?>" name="title"/>
                                     <p>Qty</p>
                                     <div class="quantity">
                                         <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
@@ -195,7 +218,20 @@
                                 </div>
                                 <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
                             </form>
+                            <?php
+                                if(isset($_REQUEST['addtocart'])){
+                                    $product_id = $_REQUEST['product_id'];
+                                    $product_name=$_REQUEST['title'];
+                                    $qty=$_REQUEST['quantity'];
+                                    $price_tt = $qty* $pdt_row['price'];
+                                   $user_id=1;
+                                   $sql="insert into cart_items(user_id,product_id,quantity,tt_price) values('$user_id','$product_id','$qty','$price_tt')";
+                                   $dd_query=mysqli_query($con,$sql);
+                                   mysqli_close($con);
 
+                                }
+                                
+                                ?>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-
+<?php require_once "connect.php";?>
 <body>
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-100">
@@ -116,15 +116,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <?php 
+                                $cart_query=mysqli_query($con,"select * from cart_items");
+                                if (mysqli_num_rows($cart_query) > 0) {
+                                    while($row = mysqli_fetch_assoc($cart_query)) {
+                                       ?>
+                                        <tr>
                                         <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart1.jpg" alt="Product"></a>
+                                            <?php 
+                                            $get_pdt=mysqli_query($con,"select * from product_images where product_id=".$row['product_id']." ");
+                                            $img= mysqli_fetch_array($get_pdt);
+                                            
+                                           echo '<img src="images/'.$img["name"].'" alt="Product">' ;
+                                            ?>
+                                            
+                                            
                                         </td>
                                         <td class="cart_product_desc">
-                                            <h5>White Modern Chair</h5>
+                                        <?php 
+                                            $get_name=mysqli_query($con,"select * from products where id=".$row['product_id']." ");
+                                            $title= mysqli_fetch_array($get_name);
+                                            
+                                           echo '<h5>'.$title['name'].'</h5>' ;
+                                            ?>
+                                            
                                         </td>
                                         <td class="price">
-                                            <span>$130</span>
+                                            <span><?php echo $row["tt_price"];?></span>
                                         </td>
                                         <td class="qty">
                                             <div class="qty-btn d-flex">
@@ -137,62 +155,35 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart2.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty2'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product_img">
-                                            <a href="#"><img src="img/bg-img/cart3.jpg" alt="Product"></a>
-                                        </td>
-                                        <td class="cart_product_desc">
-                                            <h5>Minimal Plant Pot</h5>
-                                        </td>
-                                        <td class="price">
-                                            <span>$10</span>
-                                        </td>
-                                        <td class="qty">
-                                            <div class="qty-btn d-flex">
-                                                <p>Qty</p>
-                                                <div class="quantity">
-                                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    <input type="number" class="qty-text" id="qty3" step="1" min="1" max="300" name="quantity" value="1">
-                                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty3'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                 <?php   }
+
+                                }else{
+                                    echo "Database empty";
+                                }
+                                
+                                ?>
+                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">
                         <div class="cart-summary">
+                        <?php 
+                        // get sum of values in cart
+                        $sum_price = "select sum(tt_price) as total from cart_items";
+                        $result = mysqli_query($con,$sum_price);
+                        $mtotal= mysqli_fetch_array($result);
+
+                        ?>
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>subtotal:</span> <span>$140.00</span></li>
+                                <li><span>subtotal:</span> <span><?php echo $mtotal['total'];?></span></li>
                                 <li><span>delivery:</span> <span>Free</span></li>
-                                <li><span>total:</span> <span>$140.00</span></li>
+                                <li><span>total:</span> <span>$<?php echo $mtotal['total'];?></span></li>
                             </ul>
                             <div class="cart-btn mt-100">
-                                <a href="cart.html" class="btn amado-btn w-100">Checkout</a>
+                                <a href="cart.php" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>

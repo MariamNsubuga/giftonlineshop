@@ -242,6 +242,8 @@
                     if (mysqli_num_rows($query) > 0) {
                         while($row = mysqli_fetch_assoc($query)) {
                        if($a % 3 ==0){
+                        $get_name=mysqli_query($con,"select * from products where id=".$row['product_id']." ");
+                        $title= mysqli_fetch_array($get_name);
                            echo ' <!-- Single Product Area -->
                            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                                <div class="single-product-wrapper">
@@ -257,11 +259,11 @@
                                        <!-- Product Meta Data -->
                                        <div class="product-meta-data">
                                            <div class="line"></div>
-                                           <p class="product-price">$180</p>
+                                           <p class="product-price">UGX '.$title['price'].'</p>
                                            <form action="product-details.php" action="POST">
                                            <input type="hidden" value="'.$row['product_id'].'" name="product_id"/>
                                            <button type="submit" name="submit" value="submit" class="btn-floating btn waves-effect waves-light">
-                                                                    <h6>Modern Chair</h6></button>
+                                                                    <h6>'.$title['name'].'</h6></button>
                                                                 
                                            </form>
                                            

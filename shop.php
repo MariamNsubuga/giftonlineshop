@@ -257,13 +257,7 @@
                                    <!-- Product Description -->
                                    <div class="product-description d-flex align-items-center justify-content-between">
                                        <!-- Product Meta Data -->
-                                       <div class="product-meta-data">
-                                           <div class="line"></div>
-                                           <p class="product-price">UGX '.$title['price'].'</p>
-                                           <form action="product-details.php" action="POST">
-                                           <input type="hidden" value="'.$row['product_id'].'" name="product_id"/>
-                                           <button type="submit" name="submit" value="submit" class="btn-floating btn waves-effect waves-light">
-                                                                    <h6>'.$title['name'].'</h6></button>
+                                       </button>
                                                                 
                                            </form>
                                            

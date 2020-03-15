@@ -255,11 +255,25 @@
                                    </div>
        
                                    <!-- Product Description -->
+
                                    <div class="product-description d-flex align-items-center justify-content-between">
                                        <!-- Product Meta Data -->
-                                       </button>
-                                                                
-                                           </form>
+                                       <div class = "product-meta-data">
+                                       <div class="line"></div>
+                                           <form method="POST" action="product-details.php">
+                                                
+                                              <input type="hidden" value='.$row['product_id'].' name = "product_id">
+                                              <p class ="product-price">UGX'.$title['price'].'</p>
+                                              <button type="submit"  value="submit" name="submit">
+
+                                               
+                                               <h6> '.$title['name'].'</h6>
+                                                   </button>
+                                               </form>
+                                          </div>
+
+                                    
+                                          
                                            
                                        </div>
                                        <!-- Ratings & Cart -->

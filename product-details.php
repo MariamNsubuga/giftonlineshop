@@ -134,7 +134,7 @@
                                     //    require "connect.php";           
                                         if(isset($_REQUEST['submit'])){
                                             $product_id = $_REQUEST['product_id'];
-            
+                                            
                                             $query=mysqli_query($con,"select * from product_images where product_id=".$product_id."") or die(mysqli_error());
                                             $row = mysqli_fetch_array($query);
                                             // select product details from the product table
@@ -204,7 +204,7 @@
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form class="cart clearfix" method="post">
+                            <form class="cart clearfix" method="post" action="cart.php">
                                 <div class="cart-btn d-flex mb-50">
                                 <input type="hidden" value="<?php echo $row['product_id'];?>" name="product_id"/>
                                 <input type="hidden" value="<?php echo $pdt_row['name'];?>" name="title"/>

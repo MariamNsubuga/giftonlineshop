@@ -53,7 +53,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -69,7 +69,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+               <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
@@ -79,7 +79,6 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                     <li><a href="cart.php">Cart</a></li>
                     <li><a href="checkout.php">Checkout</a></li>
                     <li><a href="login.php">Login</a></li>
-                    <li><a href="logout.php">Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -95,11 +94,11 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                 <!--  Catagories  -->
                 <div class="catagories-menu">
                     <ul>
-                        <li class="active"><a href="shop.php">Animals</a></li>
+                        <li ><a href="shop.php">Animals</a></li>
                         <li><a href="cards.php">Cards</a></li>
                         <li><a href="bags.php">Shopping bags</a></li>
                         <li><a href="flower.php">Flower vases </a></li>
-                        <li><a href="earring.php">Earrings</a></li>
+                        <li class="active"><a href="earring.php">Earrings</a></li>
                         <li><a href="paper_beads.php">Paper bead Necklaces</a></li>
                         <li><a href="glass_beads.php">Glass bead necklaces </a></li>
                         <li><a href="wooden_necklase.php">Wooden necklaces</a></li>
@@ -190,7 +189,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                                    <div class="product-img">
                                        <img src="images/'.$row['name'].'" alt="">
                                        <!-- Hover Thumb -->
-                                       
+                                      
                                    </div>
        
                                    <!-- Product Description -->
@@ -220,7 +219,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                                            <form action="product-details.php" action="POST">
                                            <input type="hidden" value="'.$row['product_id'].'" name="product_id"/>
                                            <button type="submit" name="submit" value="submit" class="btn-floating btn waves-effect waves-light">
-                                                                    <h6><a data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a></button>
+                                                                    <h6><a data-toggle="tooltip" data-placement="left" title="Buy Now"><img src="img/core-img/cart.png" alt=""></a></button>
                                                                 
                                            </form>
                                                
@@ -310,7 +309,7 @@ echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pag
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                           <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+                          <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
                         </div>
                        
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

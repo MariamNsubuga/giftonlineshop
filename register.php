@@ -1,7 +1,26 @@
+<?php
+include_once("connect.php");
+if(isset($_POST['submit'])){
+    $username=$_POST['username'];
+    $email=$_POST['email'];
+    $location=$_POST['location'];
+    $contact=$_POST['contact'];
+    $pass=$_POST['password'];
+    // header ("Location: login.php");
+    
+    $query="insert into Users(username,email,location,contact,password) values('$username','$email','$location','$contact','$pass') ";
+    $add_user=mysqli_query($con,$query);
+    if($add_user){
+        header ("Location: login.php");
+    }
+    else{
+        header ("Location: register.php");
+    }
 
-<!DOCTYPE html>
-<html lang="en">
+}
 
+?>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -10,7 +29,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>CWI| Home</title>
+    <title>CWI | SIGNIN</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -18,12 +37,14 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
+    <style>
 
+
+    </style>
 </head>
-
 <body>
-    <!-- Search Wrapper Area Start -->
-    <div class="search-wrapper section-padding-100">
+<!-- Search Wrapper Area Start -->
+<div class="search-wrapper section-padding-100">
         <div class="search-close">
             <i class="fa fa-close" aria-hidden="true"></i>
         </div>
@@ -49,8 +70,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <!-- <a href="index.html"><img src="img/core-img/logo.png" alt=""></a> -->
-                 <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+               <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -67,136 +87,78 @@
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
-                 <a href="index.html">CWI MISSION</a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
+                    
                     <li><a href="cart.php">Cart</a></li>
-                    <li><a href="checkout.php">Checkout</a></li>
+                    <li class="active"><a href="checkout.php">Checkout</a></li>
                 </ul>
             </nav>
+            <!-- Button Group -->
+           
+            <!-- Cart Menu -->
+           
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
         </header>
         <!-- Header Area End -->
 
-        <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix">
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="checkout_details_area mt-50 clearfix">
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="images/george-walker-eKf44HSIH1E-unsplash.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Animals </h4>
-                        </div>
-                    </a>
-                </div>
+                            <div class="cart-title">
+                                <h2>SIGN UP</h2>
+                            </div>
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="cards.php">
-                        <img src="images/bdcard.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Cards</h4>
+                            <form action="register.php" method="post">
+                                <div class="row">
+                                <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" id="email" placeholder="Username" name="username">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="email" class="form-control" id="email" placeholder="Email or Username" name="email">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" id="email" placeholder="location" name="location">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" id="email" placeholder="Contact" name="contact">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="password" class="form-control" id="email" placeholder="password" name="password">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="password" class="form-control" id="email" placeholder="Confirm Password" name="confirm_password">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="submit" value="SIGN UP" name="submit"> 
+                                    </div>
+                                 </div>
+                            </form>
+                            
                         </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="bags.php">
-                        <img src="images/bag1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Shopping bags</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="images/flowerv.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Flower vases</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="images/seashell-in-love-kristin-nrjwhFB2kKY-unsplash.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Earrings</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="images/craft1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Paper bead Necklaces </h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="img/bg-img/7.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Glass bead necklaces</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="images/craft3.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Wooden necklaces </h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.php">
-                        <img src="images/crafts.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <h4 style="color:white;">Mixture of wood, paper and glass-</h4>
-                        </div>
-                    </a>
+                       
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <!-- Product Catagories Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
+    <!-- ##### Newsletter Area End ##### -->
+
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
         <div class="container">
@@ -206,8 +168,12 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                          <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+                        <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
                         </div>
+                        <!-- Copywrite Text -->
+                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     </div>
                 </div>
                 <!-- Single Widget Area -->

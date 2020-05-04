@@ -1,3 +1,18 @@
+<?php
+include_once("connect.php");
+session_start();
+ #get user id
+ $query1=mysqli_query($con,"select * from Users where email='".$_SESSION['username']."' ");
+ $query1_row=mysqli_fetch_array($query1);
+ $user_id=$query1_row['user_id'];
+
+//  getting the shopping cart 
+ // get sum of values in cart
+ $sum_price = "select sum(tt_price) as total from cart_items where user_id='".$user_id."'";
+ $result = mysqli_query($con,$sum_price);
+ $mtotal= mysqli_fetch_array($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +33,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<?php require_once "connect.php";?>
+
 <body>
     <!-- Search Wrapper Area Start -->
     <div class="search-wrapper section-padding-100">
@@ -47,7 +62,8 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <!-- <a href="index.html"><img src="img/core-img/logo.png" alt=""></a> -->
+                <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -63,36 +79,17 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+               <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="shop.php">Shop</a></li>
-                    <li><a href="product-details.php">Product</a></li>
                     <li class="active"><a href="cart.php">Cart</a></li>
                     <li><a href="checkout.php">Checkout</a></li>
                 </ul>
             </nav>
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
-            </div>
-            <!-- Social Button -->
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
         </header>
         <!-- Header Area End -->
 
@@ -116,7 +113,7 @@
                                 </thead>
                                 <tbody>
                                 <?php 
-                                $cart_query=mysqli_query($con,"select * from cart_items");
+                                $cart_query=mysqli_query($con,"select * from cart_items where user_id='".$user_id."'");
                                 if (mysqli_num_rows($cart_query) > 0) {
                                     while($row = mysqli_fetch_assoc($cart_query)) {
                                        ?>
@@ -179,7 +176,7 @@
                             <ul class="summary-table">
                                 <li><span>subtotal:</span> <span><?php echo $mtotal['total'];?></span></li>
                                 <li><span>delivery:</span> <span>Free</span></li>
-                                <li><span>total:</span> <span>$<?php echo $mtotal['total'];?></span></li>
+                                <li><span>total:</span> <span>UGX <?php echo $mtotal['total'];?></span></li>
                             </ul>
                             <div class="cart-btn mt-100">
                                 <a href="cart.php" class="btn amado-btn w-100">Checkout</a>
@@ -192,29 +189,7 @@
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
-    <!-- ##### Newsletter Area Start ##### -->
-    <section class="newsletter-area section-padding-100-0">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Newsletter Text -->
-                <div class="col-12 col-lg-6 col-xl-7">
-                    <div class="newsletter-text mb-100">
-                        <h2>Subscribe for a <span>25% Discount</span></h2>
-                        <p>Nulla ac convallis lorem, eget euismod nisl. Donec in libero sit amet mi vulputate consectetur. Donec auctor interdum purus, ac finibus massa bibendum nec.</p>
-                    </div>
-                </div>
-                <!-- Newsletter Form -->
-                <div class="col-12 col-lg-6 col-xl-5">
-                    <div class="newsletter-form mb-100">
-                        <form action="#" method="post">
-                            <input type="email" name="email" class="nl-email" placeholder="Your E-mail">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
     <!-- ##### Newsletter Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
@@ -226,13 +201,9 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                         <!--    <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a> -->
+                            <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
                         </div>
-                        <!-- Copywrite Text -->
-                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->& Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
-</p>
                     </div>
                 </div>
                 <!-- Single Widget Area -->
@@ -248,16 +219,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="index.html">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
+                                            <a class="nav-link" href="shop.php">Shop</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
+                                            <a class="nav-link" href="product-details.php">Product</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
+                                            <a class="nav-link" href="cart.php">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">Checkout</a>
+                                            <a class="nav-link" href="checkout.php">Checkout</a>
                                         </li>
                                     </ul>
                                 </div>

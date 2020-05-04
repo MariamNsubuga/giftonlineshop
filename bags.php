@@ -5,6 +5,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
 }
 ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -53,7 +54,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+               <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -78,10 +79,10 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                     <li class="active"><a href="shop.php">Shop</a></li>
                     <li><a href="cart.php">Cart</a></li>
                     <li><a href="checkout.php">Checkout</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="logout.php">Logout</a></li>
                 </ul>
             </nav>
+            
+            
         </header>
         <!-- Header Area End -->
 
@@ -95,9 +96,9 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                 <!--  Catagories  -->
                 <div class="catagories-menu">
                     <ul>
-                        <li class="active"><a href="shop.php">Animals</a></li>
+                        <li ><a href="shop.php">Animals</a></li>
                         <li><a href="cards.php">Cards</a></li>
-                        <li><a href="bags.php">Shopping bags</a></li>
+                        <li class="active"><a href="bags.php">Shopping bags</a></li>
                         <li><a href="flower.php">Flower vases </a></li>
                         <li><a href="earring.php">Earrings</a></li>
                         <li><a href="paper_beads.php">Paper bead Necklaces</a></li>
@@ -107,6 +108,11 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                     </ul>
                 </div>
             </div>
+
+            
+           
+
+          
         </div>
 
         <div class="amado_product_area section-padding-100">
@@ -176,7 +182,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
 
 
                     $a=0;
-                    $query=mysqli_query($con,"select * from product_images  where Category='Animal' limit  $offset, $total_records_per_page ");
+                    $query=mysqli_query($con,"select * from product_images  where Category='Bags' limit  $offset, $total_records_per_page ");
                     echo "<table border='1'>";
                     if (mysqli_num_rows($query) > 0) {
                         while($row = mysqli_fetch_assoc($query)) {
@@ -190,7 +196,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                                    <div class="product-img">
                                        <img src="images/'.$row['name'].'" alt="">
                                        <!-- Hover Thumb -->
-                                       
+                                    
                                    </div>
        
                                    <!-- Product Description -->
@@ -220,7 +226,7 @@ if(!(isset($_SESSION['username'])&& $_SESSION['username']!="")){
                                            <form action="product-details.php" action="POST">
                                            <input type="hidden" value="'.$row['product_id'].'" name="product_id"/>
                                            <button type="submit" name="submit" value="submit" class="btn-floating btn waves-effect waves-light">
-                                                                    <h6><a data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a></button>
+                                                                    <h6><a data-toggle="tooltip" data-placement="left" title="Buy now"><img src="img/core-img/cart.png" alt=""></a></button>
                                                                 
                                            </form>
                                                
@@ -299,9 +305,6 @@ echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pag
             </div>
         </div>
     </div>
-    <!-- ##### Main Content Wrapper End ##### -->
-
-    <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
         <div class="container">
             <div class="row align-items-center">
@@ -310,10 +313,8 @@ echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pag
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                           <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
+                            <a href="index.html"><img src="img/core-img/CWI1.png" alt=""></a>
                         </div>
-                       
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>
                 <!-- Single Widget Area -->
